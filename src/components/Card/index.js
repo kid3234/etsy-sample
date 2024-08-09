@@ -53,10 +53,15 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Box, CardActionArea } from "@mui/material";
 import Rating from "@mui/material/Rating";
-
+import { useNavigate } from 'react-router-dom';
 export default function CardComponent({ data }) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/detail/${data.id}`, { state: { product: data } });
+  };
   return (
-    <Card sx={{ maxWidth: 250 }}>
+    <Card sx={{ maxWidth: 250, cursor: 'pointer' }} onClick={handleClick}>
       <CardActionArea>
         <CardMedia
           component="img"

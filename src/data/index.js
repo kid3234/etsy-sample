@@ -3,6 +3,7 @@ const productData = {
     products: [
       {
         product: {
+          id:1,
           name: "Men's Running Shoes",
           price: {
             amount: 89.99,
@@ -50,6 +51,7 @@ const productData = {
       },
       {
         product: {
+          id:2,
           name: "Graphic T-Shirt",
           price: {
             amount: 25.5,
@@ -96,6 +98,7 @@ const productData = {
       },
       {
         "product": {
+          id:3,
           "name": "Smartwatch",
           "price": {
             "amount": 149.99,
@@ -139,6 +142,7 @@ const productData = {
       },
       {
         "product": {
+          id:4,
           "name": "Ceramic Coffee Mug",
           "price": {
             "amount": 12.99,
@@ -160,7 +164,7 @@ const productData = {
           "item_details": {
             "title": "Dishwasher and Microwave Safe Ceramic Coffee Mug - 350ml",
             "description": "Enjoy your favorite beverage in this durable ceramic coffee mug.",
-            "image_url": "/watch.jpg",
+            "image_url": "/mug.jpg",
             "rating": {
               "average": 4.8,
               "quality": 4.9,
@@ -183,6 +187,7 @@ const productData = {
       },
       {
         "product": {
+          id:5,
           "name": "Organic Cotton Bed Sheets",
           "price": {
             "amount": 79.99,
@@ -227,6 +232,7 @@ const productData = {
       },
       {
         "product": {
+          id:6,
           "name": "Wireless Mouse",
           "price": {
             "amount": 24.99,
@@ -269,6 +275,7 @@ const productData = {
       },
       {
         "product": {
+          id:7,
           "name": "Gaming Keyboard",
           "price": {
             "amount": 69.99,
@@ -311,6 +318,7 @@ const productData = {
       },
       {
         "product": {
+          id:8,
           "name": "Noise Cancelling Headphones",
           "price": {
             "amount": 129.99,

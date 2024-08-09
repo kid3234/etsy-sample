@@ -21,8 +21,17 @@ import StarIcon from "@mui/icons-material/Star";
 import CheckIcon from "@mui/icons-material/Check";
 import Navbar from "../../components/Navbar";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import { useLocation } from "react-router-dom";
 
 const Detail = () => {
+  const location = useLocation();
+  const { product } = location.state || {};
+
+  console.log("kkkk", product);
+
+  if (!product) {
+    return <Typography>No product data found.</Typography>;
+  }
   return (
     <div className="w-full">
       <Navbar />
@@ -43,13 +52,7 @@ const Detail = () => {
           <Link underline="hover" color="inherit" href="/">
             Homepage
           </Link>
-          <Link underline="hover" color="inherit" href="/jewelry">
-            Jewelry
-          </Link>
-          <Link underline="hover" color="inherit" href="/jewelry/necklaces">
-            Necklaces
-          </Link>
-          <Typography color="text.primary">Soccer Ball Necklace</Typography>
+          <Typography color="text.primary">Product Detail</Typography>
         </Breadcrumbs>
       </Container>
       <Container
@@ -69,21 +72,36 @@ const Detail = () => {
           sx={{ display: "flex", gap: 4, width: "100%", marginTop: 2 }}
         >
           <Grid container spacing={1}>
-         
             <Grid item xs={2} sm={2}>
               <Grid container direction="column" spacing={2}>
                 {["thumb1.jpg", "thumb2.jpg", "thumb3.jpg"].map(
                   (thumb, index) => (
                     <Grid item key={index}>
-                      <CardMedia
+                      {/* <CardMedia
                         component="img"
                         height="40"
-                        image={`/watch.jpg`} 
+                        image={product?.item_details?.image_url}
                         alt={`Thumbnail ${index + 1}`}
                         style={{
                           cursor: "pointer",
                           borderRadius: 8,
                           border: "1px solid #ddd",
+                          maxHeight: 160
+                        }}
+                      /> */}
+                      <CardMedia
+                        component="img"
+                        height="160" // Fixed height to constrain the container
+                        image={product?.item_details?.image_url}
+                        alt={`Thumbnail ${index + 1}`}
+                        style={{
+                          cursor: "pointer",
+                          borderRadius: 8,
+                          border: "1px solid #ddd",
+                          width: "100%",
+                          maxHeight: 160,
+                          objectFit: "cover",
+                          overflow: "hidden",
                         }}
                       />
                     </Grid>
@@ -92,18 +110,20 @@ const Detail = () => {
               </Grid>
             </Grid>
 
-           
             <Grid item xs={10} sm={10}>
               <Card>
                 <CardMedia
                   component="img"
                   alt="Soccer Ball Necklace"
-                  
-                  image="/watch.jpg" 
-                  title="Soccer Ball Necklace"
+                  image={product?.item_details?.image_url}
+                  title={product?.name}
                   style={{
                     borderRadius: 8,
                     border: "1px solid #ddd",
+                    width: "100%",
+                    maxHeight: 600,
+                    objectFit: "cover",
+                    overflow: "hidden",
                   }}
                 />
               </Card>
@@ -119,10 +139,9 @@ const Detail = () => {
                   <Typography variant="h6">
                     Other reviews from this shop
                   </Typography>
-                  <Rating value={5} readOnly />
+                  <Rating value={product?.reviews?.rating} readOnly />
                   <Typography variant="body2" gutterBottom>
-                    "This review comes so late but Dovile was so amazing and
-                    thoughtful and the necklace is perfect!"
+                    {product?.reviews?.text}
                   </Typography>
                 </Container>
                 <List>
@@ -154,16 +173,16 @@ const Detail = () => {
               Rare find
             </Typography>
             <Typography variant="h4" gutterBottom>
-              USD 50.79
+              USD {product?.price?.amount}
             </Typography>
             <Typography variant="body2" color="textSecondary" gutterBottom>
-              Local taxes included (where applicable)
+              {product?.price?.price_details}
             </Typography>
             <Typography variant="h5" gutterBottom>
-              Soccer Ball Necklace-Football Beaded Necklace-Soccer Fans Gift...
+              {product?.item_details?.description}
             </Typography>
             <Typography variant="body2" color="textSecondary" gutterBottom>
-              by DreamBeadsDovi
+              by {product?.seller?.name}
             </Typography>
             <Rating value={5} readOnly />
             <Typography variant="body2" gutterBottom>
@@ -192,25 +211,25 @@ const Detail = () => {
                     <ListItemIcon>
                       <CheckIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Made by DreamBeadsDovi" />
+                    <ListItemText
+                      primary={`Made by ${product?.seller?.name}`}
+                    />
                   </ListItem>
                   <ListItem>
                     <ListItemIcon>
                       <CheckIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Materials: Glass" />
+                    <ListItemText
+                      primary={`Materials: ${product?.highlights?.material}`}
+                    />
                   </ListItem>
                   <ListItem>
                     <ListItemIcon>
                       <CheckIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Chain style: Bead" />
-                  </ListItem>
-                  <ListItem>
-                    <ListItemIcon>
-                      <CheckIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Necklace length: 42 Centimeters" />
+                    <ListItemText
+                      primary={`Clolor: ${product?.highlights?.color}`}
+                    />
                   </ListItem>
                 </List>
               </CardContent>
@@ -220,9 +239,7 @@ const Detail = () => {
               <CardContent>
                 <Typography variant="h6">About this item</Typography>
                 <Typography variant="body2" gutterBottom>
-                  Soccer Ball Necklace-Football Beaded Necklace-Soccer Fans
-                  Gift-Soccer Ball Charm Necklace-Ball Charm-Football Charm
-                  Necklace-Green Necklace
+                  {product?.item_details?.description}
                 </Typography>
               </CardContent>
             </Card>
