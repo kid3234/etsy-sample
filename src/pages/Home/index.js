@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import Button from "@mui/material/Button";
 import CardComponent from "../../components/Card";
 import Typography from "@mui/material/Typography";
 import productData from "../../data";
 import CloseIcon from "@mui/icons-material/Close";
+import TuneIcon from '@mui/icons-material/Tune';
 import {
   FormControl,
   InputLabel,
@@ -15,20 +16,60 @@ import {
 } from "@mui/material";
 
 function Home() {
+  const [windowDimensions, setWindowDimensions] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    }
+
+  
+    window.addEventListener("resize", handleResize);
+
+    
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  
+  const isMobileView = windowDimensions.width <= 768;
   return (
-    <div>
+    <div className=" overflow-hidden">
       <Navbar />
-      <div className="px-16 py-4">
-        <div className="flex items-center gap-4 mb-4">
-          <div>
-            <img src="/22831.jpg" alt="category image" className="w-48 h-48" />
+      <div className="w-full p-4 lg:px-16 py-4">
+        <div className="px-4 w-full flex gap-10 mb-4">
+          <div className=" w-1/3 lg:w-52">
+            <img
+              src="/22831.jpg"
+              alt="category-image"
+              className="w-full h-48 object-cover"
+            />
           </div>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col items-start gap-2 w-2/3">
             <div className="flex gap-2 items-center">
               <p>efratul</p>
               <p>(224)</p>
             </div>
-            <Typography variant="body2" className="w-[600px] text-justify">
+            <Typography
+              variant="body2"
+              className="lg:w-40 w-40 text-justify md:truncate"
+              sx={
+                isMobileView
+                  ? {
+                      textOverflow: "ellipsis",
+                      overflow: "hidden",
+                      whiteSpace: "nowrap",
+                      maxWidth: "40%",
+                    }
+                  : {}
+              }
+              
+            >
               Prow scuttle parrel provost Sail ho shrouds spirits boom
               mizzenmast yardarm. Pinnace holystone mizzenmast quarter crow's
               rutters.
@@ -55,108 +96,126 @@ function Home() {
             </Button>
           </div>
         </div>
+
         <hr />
-        <div className="flex flex-col gap-2">
-          <div className="w-full">
-            <div className="flex gap-4 items-center justify-between">
-              <Button
-                variant="outlined"
-                sx={{
-                  width: 150,
-                  borderRadius: 20,
-                  color: "black",
-                  borderColor: "black",
-                }}
-              >
-                All Filters
-              </Button>
-              <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                <Typography variant="body2" color="text.secondary">
-                  356 results, with Ads
-                </Typography>
-                <FormControl
-                  sx={{
-                    m: 1,
-                    minWidth: 250,
-                    borderRadius: "50px",
-                    border: "1px solid #ccc",
-                  }}
-                  size="small"
-                >
-                  <InputLabel
-                    id="demo-select-small-label"
-                    sx={{
-                      position: "absolute",
-                      top: "50%",
-                      left: "12px",
-                      transform: "translateY(-50%)",
-                      backgroundColor: "white",
-                      px: 1,
-                      borderRadius: "50px",
-                      zIndex: 1,
-                    }}
-                  >
-                    Sort by
-                  </InputLabel>
-                  <Select
-                    labelId="demo-select-small-label"
-                    id="demo-select-small"
-                    defaultValue="Most relevant"
-                    sx={{
-                      borderRadius: "50px",
-                      "& .MuiSelect-select": {
-                        borderRadius: "50px",
-                      },
-                      "& .MuiOutlinedInput-notchedOutline": {
-                        borderRadius: "50px",
-                      },
-                      position: "relative",
-                      "& .MuiSelect-icon": {
-                        right: "12px",
-                      },
-                      borderColor: "black",
-                      paddingLeft: 9,
-                    }}
-                    input={<OutlinedInput label="Sort by" />}
-                    variant="outlined"
-                    displayEmpty
-                  >
-                    <MenuItem value="Most relevant">Most relevant</MenuItem>
-                    <MenuItem value="Price: low to high">
-                      Price: low to high
-                    </MenuItem>
-                    <MenuItem value="Price: high to low">
-                      Price: high to low
-                    </MenuItem>
-                    <MenuItem value="Top reviews">Top reviews</MenuItem>
-                    <MenuItem value="Newest">Newest</MenuItem>
-                  </Select>
-                </FormControl>
-              </Box>
+
+        {isMobileView ? (
+          <div className="w-full p-2 flex relative mb-10">
+            <div className="w-10 h-10 border-2 border-gray-950 rounded-full p-2 self-end absolute right-2 top-2">
+            <TuneIcon/>
             </div>
           </div>
-          <div className="rounded-full px-4 py-2 bg-gray-300 flex gap-1 items-center w-36 text-black">
-            Etsy's Picks
-            <CloseIcon />
+         
+        ) : (
+          <div className="flex flex-col gap-2">
+            <div className="w-full">
+              <div className="flex gap-4 items-center justify-between">
+                <Button
+                  variant="outlined"
+                  sx={{
+                    width: 150,
+                    borderRadius: 20,
+                    color: "black",
+                    borderColor: "black",
+                  }}
+                >
+                  All Filters
+                </Button>
+                <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                  <Typography variant="body2" color="text.secondary">
+                    356 results, with Ads
+                  </Typography>
+                  <FormControl
+                    sx={{
+                      m: 1,
+                      minWidth: 250,
+                      borderRadius: "50px",
+                      border: "1px solid #ccc",
+                    }}
+                    size="small"
+                  >
+                    <InputLabel
+                      id="demo-select-small-label"
+                      sx={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "12px",
+                        transform: "translateY(-50%)",
+                        backgroundColor: "white",
+                        px: 1,
+                        borderRadius: "50px",
+                        zIndex: 1,
+                      }}
+                    >
+                      Sort by
+                    </InputLabel>
+                    <Select
+                      labelId="demo-select-small-label"
+                      id="demo-select-small"
+                      defaultValue="Most relevant"
+                      sx={{
+                        borderRadius: "50px",
+                        "& .MuiSelect-select": {
+                          borderRadius: "50px",
+                        },
+                        "& .MuiOutlinedInput-notchedOutline": {
+                          borderRadius: "50px",
+                        },
+                        position: "relative",
+                        "& .MuiSelect-icon": {
+                          right: "12px",
+                        },
+                        borderColor: "black",
+                        paddingLeft: 9,
+                      }}
+                      input={<OutlinedInput label="Sort by" />}
+                      variant="outlined"
+                      displayEmpty
+                    >
+                      <MenuItem value="Most relevant">Most relevant</MenuItem>
+                      <MenuItem value="Price: low to high">
+                        Price: low to high
+                      </MenuItem>
+                      <MenuItem value="Price: high to low">
+                        Price: high to low
+                      </MenuItem>
+                      <MenuItem value="Top reviews">Top reviews</MenuItem>
+                      <MenuItem value="Newest">Newest</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
+              </div>
+            </div>
+            <div className="rounded-full px-4 py-2 bg-gray-300 flex gap-1 items-center w-36 text-black">
+              Etsy's Picks
+              <CloseIcon />
+            </div>
           </div>
-        </div>
+        )}
 
-        <div className="w-full flex items-center justify-between mt-4">
-          <Typography>Etsy's Picks</Typography>
-          <Button
-            variant="outlined"
-            sx={{
-              width: 120,
-              borderRadius: 20,
-              color: "black",
-              borderColor: "black",
-            }}
-          >
-            See More
-          </Button>
+        {isMobileView ? (
+          <div className="px-4   flex gap-1 items-center w-36 text-black">
+          Etsy's Picks
+          <CloseIcon />
         </div>
+        ) : (
+          <div className="w-full flex items-center justify-between mt-4">
+            <Typography>Etsy's Picks</Typography>
+            <Button
+              variant="outlined"
+              sx={{
+                width: 120,
+                borderRadius: 20,
+                color: "black",
+                borderColor: "black",
+              }}
+            >
+              See More
+            </Button>
+          </div>
+        )}
 
-        <div className="w-full grid grid-cols-6 gap-4 mt-4">
+        <div className="w-full grid grid-cols-2 lg:grid-cols-6  gap-4 mt-4">
           {productData.products.map((data) => (
             <CardComponent key={data?.product?.id} data={data?.product} />
           ))}
