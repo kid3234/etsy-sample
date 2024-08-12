@@ -27,7 +27,7 @@ const productData = {
             title: "Men's Lightweight Running Shoes - Breathable and Comfortable",
             description:
               "Perfect for daily runs, these shoes are lightweight and provide excellent support.",
-            image_url: "s1.jpg",
+            image_url: "pair-trainers.jpg",
             rating: {
               average: 4.7,
               quality: 4.8,
