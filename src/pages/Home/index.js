@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import productData from "../../data";
 import CloseIcon from "@mui/icons-material/Close";
 import TuneIcon from "@mui/icons-material/Tune";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import {
   FormControl,
   InputLabel,
@@ -40,11 +41,14 @@ function Home() {
       <Navbar />
       <div className="w-full p-4 lg:px-16 py-4">
         <div className="px-4 w-full flex gap-10 mb-4">
-          <div className=" w-1/2 lg:w-52">
+          <div className=" w-1/2 lg:w-52 relative rounded-md">
+          <div className="absolute top-2 right-2 p-1 bg-white rounded-full">
+          <FavoriteBorderIcon />
+          </div>
             <img
               src="/22831.jpg"
               alt="category-image"
-              className="w-full h-48 object-cover"
+              className="w-full h-48 object-cover rounded-md"
             />
           </div>
           <div className="flex flex-col items-start gap-2 w-1/2 lg:w-2/3">

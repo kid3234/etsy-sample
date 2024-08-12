@@ -13,6 +13,8 @@ import {
   ListItemText,
   Rating,
   Link,
+  Badge,
+  IconButton,
   Breadcrumbs,
 } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
@@ -20,7 +22,10 @@ import CheckIcon from "@mui/icons-material/Check";
 import Navbar from "../../components/Navbar";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { useLocation } from "react-router-dom";
-
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import AutoAwesomeOutlinedIcon from "@mui/icons-material/AutoAwesomeOutlined";
 const Detail = () => {
   const location = useLocation();
   const { product } = location.state || {};
@@ -101,10 +106,16 @@ const Detail = () => {
             {isMobileView ? (
               <>
                 <Grid item xs={12}>
-                  <Card>
+                  <Card
+                    sx={{
+                      position: "relative",
+                      display: "inline-block",
+                      width: "100%",
+                    }}
+                  >
                     <CardMedia
                       component="img"
-                      alt="Soccer Ball Necklace"
+                      alt={product?.name || "Product Image"}
                       image={product?.item_details?.image_url}
                       title={product?.name}
                       sx={{
@@ -115,6 +126,52 @@ const Detail = () => {
                         objectFit: "cover",
                       }}
                     />
+
+                    <Badge
+                      badgeContent={
+                        <Typography
+                          variant="caption"
+                          sx={{
+                            backgroundColor: "#D0BA4D",
+                            borderRadius: 2,
+                            px: 1,
+                            py: 1,
+                            fontSize: "0.75rem",
+                            alignItems: "center",
+                            width: 120,
+                            color: "black",
+                            display: "flex",
+                            gap: 1,
+                          }}
+                        >
+                          <AutoAwesomeOutlinedIcon />
+                          Etsy's Pick
+                        </Typography>
+                      }
+                      overlap="rectangular"
+                      sx={{
+                        position: "absolute",
+                        top: 30,
+                        left: 70,
+                        zIndex: 1,
+                      }}
+                    />
+
+                    <IconButton
+                      sx={{
+                        position: "absolute",
+                        top: 8,
+                        right: 8,
+                        zIndex: 1,
+                        backgroundColor: "white",
+                        color: "#333",
+                        borderRadius: "50%",
+                        boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
+                      }}
+                      aria-label="favorite"
+                    >
+                      <FavoriteIcon />
+                    </IconButton>
                   </Card>
                 </Grid>
                 <Grid item xs={12} sx={{ textAlign: "center", marginTop: 2 }}>
@@ -268,10 +325,16 @@ const Detail = () => {
                 </Grid>
 
                 <Grid item xs={10} sm={10}>
-                  <Card>
+                  <Card
+                    sx={{
+                      position: "relative",
+                      display: "inline-block",
+                      width: "100%",
+                    }}
+                  >
                     <CardMedia
                       component="img"
-                      alt="Soccer Ball Necklace"
+                      alt={product?.name || "Product Image"}
                       image={product?.item_details?.image_url}
                       title={product?.name}
                       sx={{
@@ -282,6 +345,86 @@ const Detail = () => {
                         objectFit: "cover",
                       }}
                     />
+
+                    <Badge
+                      badgeContent={
+                        <Typography
+                          variant="caption"
+                          sx={{
+                            backgroundColor: "#D0BA4D",
+                            borderRadius: 2,
+                            px: 1,
+                            py: 1,
+                            fontSize: "0.75rem",
+                            alignItems: "center",
+                            width: 120,
+                            color: "black",
+                            display: "flex",
+                            gap: 1,
+                          }}
+                        >
+                          <AutoAwesomeOutlinedIcon />
+                          Etsy's Pick
+                        </Typography>
+                      }
+                      overlap="rectangular"
+                      sx={{
+                        position: "absolute",
+                        top: 30,
+                        left: 70,
+                        zIndex: 1,
+                      }}
+                    />
+
+                    <IconButton
+                      sx={{
+                        position: "absolute",
+                        top: 8,
+                        right: 8,
+                        zIndex: 1,
+                        backgroundColor: "white",
+                        color: "#333",
+                        borderRadius: "50%",
+                        boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
+                      }}
+                      aria-label="favorite"
+                    >
+                      <FavoriteIcon />
+                    </IconButton>
+
+                    <IconButton
+                      sx={{
+                        position: "absolute",
+                        top: "50%",
+                        left: 8,
+                        zIndex: 1,
+                        transform: "translateY(-50%)",
+                        backgroundColor: "white",
+                        color: "#333",
+                        borderRadius: "50%",
+                        boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
+                      }}
+                      aria-label="previous"
+                    >
+                      <ArrowBackIosNewIcon />
+                    </IconButton>
+
+                    <IconButton
+                      sx={{
+                        position: "absolute",
+                        top: "50%",
+                        right: 8,
+                        zIndex: 1,
+                        transform: "translateY(-50%)",
+                        backgroundColor: "white",
+                        color: "#333",
+                        borderRadius: "50%",
+                        boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
+                      }}
+                      aria-label="next"
+                    >
+                      <ArrowForwardIosIcon />
+                    </IconButton>
                   </Card>
 
                   <Grid container spacing={2} style={{ marginTop: 40 }}>
