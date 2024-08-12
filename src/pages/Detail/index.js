@@ -15,8 +15,6 @@ import {
   Link,
   Breadcrumbs,
 } from "@mui/material";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import ReportProblemIcon from "@mui/icons-material/ReportProblem";
 import StarIcon from "@mui/icons-material/Star";
 import CheckIcon from "@mui/icons-material/Check";
 import Navbar from "../../components/Navbar";
@@ -28,7 +26,6 @@ const Detail = () => {
   const { product } = location.state || {};
 
   console.log(product);
-  
 
   const [windowDimensions, setWindowDimensions] = useState({
     width: window.innerWidth,
@@ -134,7 +131,11 @@ const Detail = () => {
                   >
                     {product?.price?.price_details}
                   </Typography>
-                  <Typography variant="h5" gutterBottom className="text-justify">
+                  <Typography
+                    variant="h5"
+                    gutterBottom
+                    className="text-justify"
+                  >
                     {product?.item_details?.description}
                   </Typography>
                   <Typography
@@ -145,7 +146,11 @@ const Detail = () => {
                     by {product?.seller?.name}
                   </Typography>
                   <Rating value={5} readOnly />
-                  <Typography variant="body2" gutterBottom className="text-justify">
+                  <Typography
+                    variant="body2"
+                    gutterBottom
+                    className="text-justify"
+                  >
                     Returns & exchanges accepted
                   </Typography>
                   <Button
@@ -163,49 +168,76 @@ const Detail = () => {
                     Add to cart
                   </Button>
 
-                
-              <Card style={{ marginTop: 20 }}>
-              <CardContent>
-                <Typography variant="h6">Item details</Typography>
-                <List>
-                  <ListItem>
-                    <ListItemIcon>
-                      <CheckIcon />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={`Made by ${product?.seller?.name}`}
-                    />
-                  </ListItem>
-                  <ListItem>
-                    <ListItemIcon>
-                      <CheckIcon />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={`Materials: ${product?.highlights?.material}`}
-                    />
-                  </ListItem>
-                  <ListItem>
-                    <ListItemIcon>
-                      <CheckIcon />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={`Clolor: ${product?.highlights?.color}`}
-                    />
-                  </ListItem>
-                </List>
-              </CardContent>
-            </Card>
+                  <Card style={{ marginTop: 20 }}>
+                    <CardContent>
+                      <Typography variant="h6">Item details</Typography>
+                      <List>
+                        <ListItem>
+                          <ListItemIcon>
+                            <CheckIcon />
+                          </ListItemIcon>
+                          <ListItemText
+                            primary={`Made by ${product?.seller?.name}`}
+                          />
+                        </ListItem>
+                        <ListItem>
+                          <ListItemIcon>
+                            <CheckIcon />
+                          </ListItemIcon>
+                          <ListItemText
+                            primary={`Materials: ${product?.highlights?.material}`}
+                          />
+                        </ListItem>
+                        <ListItem>
+                          <ListItemIcon>
+                            <CheckIcon />
+                          </ListItemIcon>
+                          <ListItemText
+                            primary={`Clolor: ${product?.highlights?.color}`}
+                          />
+                        </ListItem>
+                      </List>
+                    </CardContent>
+                  </Card>
 
-            <Card style={{ marginTop: 20 }}>
-              <CardContent>
-                <Typography variant="h6">About this item</Typography>
-                <Typography variant="body2" gutterBottom>
-                  {product?.item_details?.description}
-                </Typography>
-              </CardContent>
-            </Card>
+                  <Card style={{ marginTop: 20 }}>
+                    <CardContent>
+                      <Typography variant="h6">About this item</Typography>
+                      <Typography variant="body2" gutterBottom>
+                        {product?.item_details?.description}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                  <Container
+                    sx={{
+                      width: "500px",
+                      display: "flex",
+                      gap: 2,
+                      flexDirection: "column",
+                      alignItems: "start",
+                    }}
+                  >
+                    <div className="flex gap-2 items-start ">
+                      <Typography variant="h6">
+                        Other reviews from this shop
+                      </Typography>
+                      <Rating value={product?.seller?.rating} readOnly />
+                      <Typography>
+                        ({product?.seller?.total_reviews})
+                      </Typography>
+                    </div>
 
-
+                    <div>
+                      {product?.reviews.map((data) => {
+                        return (
+                          <>
+                            <Rating value={data?.rating} readOnly />
+                            <Typography>{data?.text}</Typography>
+                          </>
+                        );
+                      })}
+                    </div>
+                  </Container>
                 </Grid>
               </>
             ) : (
@@ -258,126 +290,144 @@ const Detail = () => {
                       xs={12}
                       sx={{ display: "flex", justifyContent: "space-evenly" }}
                     >
-                      <Container sx={{ width: "500px" }}>
-                        <Typography variant="h6">
-                          Other reviews from this shop
-                        </Typography>
-                        <Rating value={product?.reviews?.rating} readOnly />
-                        <Typography variant="body2" gutterBottom>
-                          {product?.reviews?.text}
-                        </Typography>
+                      <Container
+                        sx={{
+                          width: "500px",
+                          display: "flex",
+                          gap: 2,
+                          flexDirection: "column",
+                        }}
+                      >
+                        <div className="flex gap-2 items-center">
+                          <Typography variant="h6">
+                            Other reviews from this shop
+                          </Typography>
+                          <Rating value={product?.seller?.rating} readOnly />
+                          <Typography>
+                            ({product?.seller?.total_reviews})
+                          </Typography>
+                        </div>
+
+                        <div>
+                          {product?.reviews.map((data) => {
+                            return (
+                              <>
+                                <Rating value={data?.rating} readOnly />
+                                <Typography>{data?.text}</Typography>
+                              </>
+                            );
+                          })}
+                        </div>
                       </Container>
 
                       {isMobileView ? (
                         ""
                       ) : (
                         <List>
-                          <ListItem>
+                          <ListItem className="flex items-center justify-between">
                             <ListItemText primary="Item quality: 5" />
                             <ListItemIcon>
                               <StarIcon />
                             </ListItemIcon>
                           </ListItem>
-                          <ListItem>
+                          <ListItem className="flex items-center justify-between">
                             <ListItemText primary="Shipping: 5" />
                             <ListItemIcon>
                               <StarIcon />
                             </ListItemIcon>
                           </ListItem>
-                          <ListItem>
+                          <ListItem className="flex items-center justify-between">
                             <ListItemText primary="Customer service: 5" />
                             <ListItemIcon>
                               <StarIcon />
                             </ListItemIcon>
                           </ListItem>
                         </List>
+                       
                       )}
                     </Grid>
                   </Grid>
-
-               
                 </Grid>
               </>
             )}
           </Grid>
 
           {!isMobileView && (
-            <Grid item xs={12} sm={5}>
-              <Typography variant="h6">Product Details</Typography>
-              <Typography variant="h4" gutterBottom>
-                USD {product?.price?.amount}
-              </Typography>
-              <Typography variant="body2" color="textSecondary" gutterBottom>
-                {product?.price?.price_details}
-              </Typography>
-              <Typography variant="h5" gutterBottom>
-                {product?.item_details?.description}
-              </Typography>
-              <Typography variant="body2" color="textSecondary" gutterBottom>
-                by {product?.seller?.name}
-              </Typography>
-              <Rating value={5} readOnly />
-              <Typography variant="body2" gutterBottom>
-                Returns & exchanges accepted
-              </Typography>
-              <Button
-                variant="contained"
-                color="primary"
-                size="large"
-                sx={{
-                  marginTop: 2,
-                  backgroundColor: "black",
-                  width: "100%",
-                  maxWidth: "400px",
-                  borderRadius: 2,
-                }}
-              >
-                Add to cart
-              </Button>
-             
-              <Card style={{ marginTop: 20 }}>
-              <CardContent>
-                <Typography variant="h6">Item details</Typography>
-                <List>
-                  <ListItem>
-                    <ListItemIcon>
-                      <CheckIcon />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={`Made by ${product?.seller?.name}`}
-                    />
-                  </ListItem>
-                  <ListItem>
-                    <ListItemIcon>
-                      <CheckIcon />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={`Materials: ${product?.highlights?.material}`}
-                    />
-                  </ListItem>
-                  <ListItem>
-                    <ListItemIcon>
-                      <CheckIcon />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={`Clolor: ${product?.highlights?.color}`}
-                    />
-                  </ListItem>
-                </List>
-              </CardContent>
-            </Card>
-
-            <Card style={{ marginTop: 20 }}>
-              <CardContent>
-                <Typography variant="h6">About this item</Typography>
-                <Typography variant="body2" gutterBottom>
+            <>
+              <Grid item xs={12} sm={5}>
+                <Typography variant="h6">Product Details</Typography>
+                <Typography variant="h4" gutterBottom>
+                  USD {product?.price?.amount}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" gutterBottom>
+                  {product?.price?.price_details}
+                </Typography>
+                <Typography variant="h5" gutterBottom>
                   {product?.item_details?.description}
                 </Typography>
-              </CardContent>
-            </Card>
-
-
-            </Grid>
+                <Typography variant="body2" color="textSecondary" gutterBottom>
+                  by {product?.seller?.name}
+                </Typography>
+                <Rating value={5} readOnly />
+                <Typography variant="body2" gutterBottom>
+                  Returns & exchanges accepted
+                </Typography>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  sx={{
+                    marginTop: 2,
+                    backgroundColor: "black",
+                    width: "100%",
+                    maxWidth: "400px",
+                    borderRadius: 2,
+                  }}
+                >
+                  Add to cart
+                </Button>
+                <Card style={{ marginTop: 20 }}>
+                  <CardContent>
+                    <Typography variant="h6">Item details</Typography>
+                    <List>
+                      <ListItem>
+                        <ListItemIcon>
+                          <CheckIcon />
+                        </ListItemIcon>
+                        <ListItemText
+                          primary={`Made by ${product?.seller?.name}`}
+                        />
+                      </ListItem>
+                      <ListItem>
+                        <ListItemIcon>
+                          <CheckIcon />
+                        </ListItemIcon>
+                        <ListItemText
+                          primary={`Materials: ${product?.highlights?.material}`}
+                        />
+                      </ListItem>
+                      <ListItem>
+                        <ListItemIcon>
+                          <CheckIcon />
+                        </ListItemIcon>
+                        <ListItemText
+                          primary={`Clolor: ${product?.highlights?.color}`}
+                        />
+                      </ListItem>
+                    </List>
+                  </CardContent>
+                </Card>
+                <Card style={{ marginTop: 20 }}>
+                  <CardContent>
+                    <Typography variant="h6">About this item</Typography>
+                    <Typography variant="body2" gutterBottom>
+                      {product?.item_details?.description}
+                    </Typography>
+                  </CardContent>
+                </Card>
+               
+              </Grid>
+            </>
           )}
         </Container>
       </Container>
@@ -386,3 +436,5 @@ const Detail = () => {
 };
 
 export default Detail;
+
+
