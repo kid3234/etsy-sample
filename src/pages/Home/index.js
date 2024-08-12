@@ -5,7 +5,7 @@ import CardComponent from "../../components/Card";
 import Typography from "@mui/material/Typography";
 import productData from "../../data";
 import CloseIcon from "@mui/icons-material/Close";
-import TuneIcon from '@mui/icons-material/Tune';
+import TuneIcon from "@mui/icons-material/Tune";
 import {
   FormControl,
   InputLabel,
@@ -29,14 +29,11 @@ function Home() {
       });
     }
 
-  
     window.addEventListener("resize", handleResize);
 
-    
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  
   const isMobileView = windowDimensions.width <= 768;
   return (
     <div className=" overflow-hidden">
@@ -55,25 +52,31 @@ function Home() {
               <p>efratul</p>
               <p>(224)</p>
             </div>
-            <Typography
-              variant="body2"
-              className="lg:w-40 w-40 text-justify md:truncate"
-              sx={
-                isMobileView
-                  ? {
-                      textOverflow: "ellipsis",
-                      overflow: "hidden",
-                      whiteSpace: "nowrap",
-                      maxWidth: "40%",
-                    }
-                  : {}
-              }
-              
-            >
-              Prow scuttle parrel provost Sail ho shrouds spirits boom
-              mizzenmast yardarm. Pinnace holystone mizzenmast quarter crow's
-              rutters.
-            </Typography>
+            {isMobileView ? (
+              <Typography
+                variant="body2"
+                className="lg:w-40 w-40 text-justify md:truncate"
+                sx={{
+                  textOverflow: "ellipsis",
+                  overflow: "hidden",
+                  whiteSpace: "nowrap",
+                  maxWidth: "40%",
+                }}
+              >
+                Prow scuttle parrel provost Sail ho shrouds spirits boom
+                mizzenmast yardarm. Pinnace holystone mizzenmast quarter crow's
+                rutters.
+              </Typography>
+            ) : (
+              <Typography
+                variant="body2"
+                className="lg:w-52 w-40 text-justify "
+              >
+                Prow scuttle parrel provost Sail ho shrouds spirits boom
+                mizzenmast yardarm. Pinnace holystone mizzenmast quarter crow's
+                rutters.
+              </Typography>
+            )}
             <div>
               <Typography variant="h6">USD 19.00</Typography>
               <Typography
@@ -102,10 +105,9 @@ function Home() {
         {isMobileView ? (
           <div className="w-full p-2 flex relative mb-10">
             <div className="w-10 h-10 border-2 border-gray-950 rounded-full p-2 self-end absolute right-2 top-2">
-            <TuneIcon/>
+              <TuneIcon />
             </div>
           </div>
-         
         ) : (
           <div className="flex flex-col gap-2">
             <div className="w-full">
@@ -195,9 +197,9 @@ function Home() {
 
         {isMobileView ? (
           <div className="px-4   flex gap-1 items-center w-36 text-black">
-          Etsy's Picks
-          <CloseIcon />
-        </div>
+            Etsy's Picks
+            <CloseIcon />
+          </div>
         ) : (
           <div className="w-full flex items-center justify-between mt-4">
             <Typography>Etsy's Picks</Typography>

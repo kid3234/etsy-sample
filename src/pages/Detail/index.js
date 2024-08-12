@@ -27,6 +27,9 @@ const Detail = () => {
   const location = useLocation();
   const { product } = location.state || {};
 
+  console.log(product);
+  
+
   const [windowDimensions, setWindowDimensions] = useState({
     width: window.innerWidth,
     height: window.innerHeight,
