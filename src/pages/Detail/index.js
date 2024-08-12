@@ -343,7 +343,6 @@ const Detail = () => {
                             </ListItemIcon>
                           </ListItem>
                         </List>
-                       
                       )}
                     </Grid>
                   </Grid>
@@ -425,7 +424,6 @@ const Detail = () => {
                     </Typography>
                   </CardContent>
                 </Card>
-               
               </Grid>
             </>
           )}
@@ -436,5 +434,3 @@ const Detail = () => {
 };
 
 export default Detail;
-
-
