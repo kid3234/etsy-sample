@@ -58,6 +58,7 @@ function Navbar() {
           <div className="flex items-center gap-4 text-gray-700">
            
             <PersonOutlineOutlinedIcon fontSize="large" />
+            <CardGiftcardIcon fontSize="large"/>
             <ShoppingCartOutlinedIcon fontSize="large" />
           </div>
           
