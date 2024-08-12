@@ -40,14 +40,14 @@ function Home() {
       <Navbar />
       <div className="w-full p-4 lg:px-16 py-4">
         <div className="px-4 w-full flex gap-10 mb-4">
-          <div className=" w-1/3 lg:w-52">
+          <div className=" w-1/2 lg:w-52">
             <img
               src="/22831.jpg"
               alt="category-image"
               className="w-full h-48 object-cover"
             />
           </div>
-          <div className="flex flex-col items-start gap-2 w-2/3">
+          <div className="flex flex-col items-start gap-2 w-1/2 lg:w-2/3">
             <div className="flex gap-2 items-center">
               <p>efratul</p>
               <p>(224)</p>
@@ -55,12 +55,12 @@ function Home() {
             {isMobileView ? (
               <Typography
                 variant="body2"
-                className="lg:w-40 w-40 text-justify md:truncate"
+                className="w-64 ext-justify md:truncate"
                 sx={{
                   textOverflow: "ellipsis",
                   overflow: "hidden",
                   whiteSpace: "nowrap",
-                  maxWidth: "40%",
+                  maxWidth: "60%",
                 }}
               >
                 Prow scuttle parrel provost Sail ho shrouds spirits boom
